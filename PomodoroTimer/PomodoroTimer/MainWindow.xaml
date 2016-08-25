@@ -1,0 +1,105 @@
+﻿<Window x:Class="PomodoroTimer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PomodoroTimer"
+        mc:Ignorable="d"
+        Title       =""
+        Height      ="250" Width="670"
+        ResizeMode  ="CanMinimize"
+        Background  ="{DynamicResource ResourceKey=DefaultWindowBrush}"
+        Icon="Media/Images/Tomato.ico"
+        FocusManager.FocusedElement="{Binding ElementName=FocusOnTextBox}">
+    <Window.Resources>
+        <LinearGradientBrush x:Key="DefaultWindowBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="White" Offset="0"/>
+            <GradientStop Color="Green" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="LazerFocusedBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="White" Offset="0"/>
+            <GradientStop Color="Red" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="ProgressCheckingBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="White" Offset="0"/>
+            <GradientStop Color="Orange" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Resources>
+    <Grid Name="MainGrid" Margin="0,0,2,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="350"/>
+        </Grid.ColumnDefinitions>
+        <Label                  Name="Header"
+                                Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" FontSize="18" FontWeight="Bold"
+                                Content="Pomodoro Timer" />
+        <Label                  Name="FocusOnLabel"
+                                Grid.Column="0" Grid.Row="1"
+                                Content="Focus on:"/>
+        <TextBox                Name="FocusOnTextBox"
+                                Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" 
+                                TextChanged="FocusOnTextBox_TextChanged"/>
+        <Label                  Name="LazerFocusedTimeLabel"
+                                Grid.Column="0" Grid.Row="2" 
+                                Content="Lazer Focused Time:"/>
+        <local:NumericUpDown    x:Name="LazerFocusedTime"
+                                Grid.Column="2" Grid.Row="2" Width="Auto"
+                                Value="20"/>
+        <TextBox                Name="CountDownTextBox"
+                                Grid.Column="3" Grid.Row="2" Grid.RowSpan="3"
+                                HorizontalAlignment="Center" Width="100" BorderThickness="0"
+                                FontSize="36" FontWeight="Bold" Opacity="90"
+                                HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                IsReadOnly="True"/>
+        <Label                  Name="ProgressCheckingLabel"
+                                Grid.Column="0" Grid.Row="3"
+                                Content="Progress Checking Time:"/>
+        <local:NumericUpDown    x:Name="ProgressCheckingTime"
+                                Grid.Column="2" Grid.Row="3" Width="Auto"
+                                Value="3"/>
+        <Label                  Name="BreakTimeLabel"
+                                Grid.Column="0" Grid.Row="4" 
+                                Content="Break Time:"/>
+        <local:NumericUpDown    x:Name="BreakTime"
+                                Grid.Column="2" Grid.Row="4" Width="Auto"
+                                Value="5"/>
+        <StackPanel             Grid.Row="5" Grid.Column="2"
+                                Orientation="Vertical">
+            <Button             Name="SaveAsDefaultButton"
+                                HorizontalAlignment="Left"  VerticalAlignment="Top"
+                                Width="100" Margin="0,10,5,5"
+                                Content="Save as Default" 
+                                Click="SaveAsDefaultButton_Click" />
+            <Button             Name="RestoreDefaultsButton"
+                                HorizontalAlignment="Left"  VerticalAlignment="Top"
+                                Width="100" Margin="0,5,5,5"
+                                Content="Restore Defaults"
+                                Click="RestoreDefaultsButton_Click" />
+        </StackPanel>
+        <StackPanel             Grid.Row="5" Grid.Column="3"
+                                Orientation="Horizontal">
+            <Button             x:Name="Restart"
+        	                    HorizontalAlignment="Center"  VerticalAlignment="Bottom"
+        	                    Width="75" Margin="10"
+        	                    Content="Restart"
+                                Click="Restart_Click"/>
+            <Button             x:Name="StartTimer"
+        	                    HorizontalAlignment="Center"  VerticalAlignment="Center"
+        	                    Width="150" Height="50"  Margin="100,10"
+        	                    Content="Start"
+                                Click="StartTimer_Click"
+                                IsDefault="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
